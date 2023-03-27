@@ -18,9 +18,13 @@ export class UploadFilesController {
   }
 
 
-  @MessagePattern('updateFileByUserId')
-  async updateImageByUserId({ IdUser, base64EncodedImage, name, contentType }) {
-      return await this.fileservise.updateFile(IdUser, base64EncodedImage, name, contentType);
+  // @MessagePattern('updateFileByUserId')
+  // async updateImageByUserId({ IdUser, base64EncodedImage, name, contentType }) {
+  //   return await this.fileservise.updateFile(IdUser, base64EncodedImage, name, contentType);
+  // }
+  @MessagePattern('updateFileById')
+  async updateImageByUserId({ _id, base64EncodedImage, name, contentType }) {
+    return await this.fileservise.updateFileById(_id, base64EncodedImage, name, contentType);
   }
 
   @MessagePattern('getFileByUserId')
@@ -29,10 +33,22 @@ export class UploadFilesController {
   }
 
 
+  @MessagePattern('getAllFilesByUserId')
+  async getALLFiles({ userId }: { userId: string }): Promise<any[]> {
+    return await this.fileservise.loadAllFiles(userId);
+  }
+
   @MessagePattern('deleteFileByUserId')
   async deleteImage(id: string) {
-      this.fileservise.deleteFile(id);
+    this.fileservise.deleteFile(id);
   }
+
+  //done
+  @MessagePattern('deleteFileById')
+  async deleteImagebyId(id: string) {
+    return this.fileservise.removefileById(id);
+  }
+
 
 
 

@@ -26,9 +26,6 @@ export class UploadImageController {
     async updateImage(@Payload() data: any) {
         const { IdUser, base64EncodedImage } = data;
         let wh = base64EncodedImage;
-        if (!base64EncodedImage) {
-            throw new Error('No file provided');
-        }
         const updatedImage = await this.imageService.updateImage(IdUser, wh);
         return updatedImage;
     }
