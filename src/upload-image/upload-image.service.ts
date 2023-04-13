@@ -26,7 +26,6 @@ export class UploadImageService {
       { data: newData },
       { new: true, uniqueIdentifier: true }
     );
- 
     Image.updateImage(image, newData);
     return image;
   }
