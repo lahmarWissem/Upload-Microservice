@@ -30,6 +30,10 @@ export class UploadImageService {
     return image;
   }
 
+  async loadImagesByUserIds(userIds: string[]): Promise<Image[]> {
+    return await this.imageModel.find({ IdUser: { $in: userIds } }).exec();
+  }
+  
 
   async deleteImage(userId: string): Promise<void> {
     this.imageModel.findOneAndDelete({ IdUser: userId }).exec();

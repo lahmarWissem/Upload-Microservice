@@ -22,6 +22,13 @@ export class UploadImageController {
         return { data: image.data };
     }
 
+    @MessagePattern('loadImagesByUserIds')
+async loadImages(userIds: string[]) {
+  const images = await this.imageService.loadImagesByUserIds(userIds);
+  return images.map(image => ({ IdUser: image.IdUser, data: image.data }));
+}
+
+
     @MessagePattern('updateImageByUserId')
     async updateImage(@Payload() data: any) {
         const { IdUser, base64EncodedImage } = data;
